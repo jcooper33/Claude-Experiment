@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/text_today_total"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_avg_calories_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/text_avg_calories_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_avg_weight_change_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/text_avg_weight_change_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_days_logged"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/text_days_over_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_plateau_flag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="12dp"
+            android:background="@color/plateau_flag_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/weight_chart_title"
+            style="@style/TextAppearance.Material3.TitleMedium" />
+
+        <com.jcooper.tracker.ui.dashboard.LineChartView
+            android:id="@+id/chart_weight"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/calorie_chart_title"
+            style="@style/TextAppearance.Material3.TitleMedium" />
+
+        <com.jcooper.tracker.ui.dashboard.LineChartView
+            android:id="@+id/chart_calories"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_export_xlsx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/export_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_export_pdf"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/export_pdf_button" />
+
+    </LinearLayout>
+</ScrollView>

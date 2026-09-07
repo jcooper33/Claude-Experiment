@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tracker_primary">#2E7D32</color>
+    <color name="tracker_on_primary">#FFFFFF</color>
+    <color name="tracker_secondary">#455A64</color>
+    <color name="chart_calories">#EF6C00</color>
+    <color name="chart_weight">#1565C0</color>
+    <color name="plateau_flag_bg">#FFF3E0</color>
+</resources>

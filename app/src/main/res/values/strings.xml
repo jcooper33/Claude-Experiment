@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Offline Tracker</string>
+
+    <string name="nav_food">Log Food</string>
+    <string name="nav_weight">Log Weight</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Log Food -->
+    <string name="food_description_hint">What did you eat/drink? (e.g. cup of rice and pork)</string>
+    <string name="food_calories_hint">Calories</string>
+    <string name="food_notes_hint">Notes (optional)</string>
+    <string name="log_for_earlier">Log for earlier</string>
+    <string name="date_label">Date</string>
+    <string name="time_label">Time</string>
+    <string name="submit_food">Log Food</string>
+    <string name="food_confirmation">Logged: %1$s — %2$d cal at %3$s</string>
+    <string name="error_description_required">Enter a description</string>
+    <string name="error_calories_required">Enter calories</string>
+
+    <!-- Log Weight -->
+    <string name="weight_lbs_hint">Weight (lbs)</string>
+    <string name="weight_notes_hint">Notes (optional)</string>
+    <string name="submit_weight">Log Weight</string>
+    <string name="weight_confirmation">Logged: %1$s lbs at %2$s</string>
+    <string name="error_weight_required">Enter your weight</string>
+
+    <!-- Dashboard -->
+    <string name="today_total">Today: %1$d / %2$d cal</string>
+    <string name="avg_calories_7">7-day avg calories: %1$s</string>
+    <string name="avg_calories_14">14-day avg calories: %1$s</string>
+    <string name="avg_weight_change_7">7-day avg weight change: %1$s lbs/day</string>
+    <string name="avg_weight_change_14">14-day avg weight change: %1$s lbs/day</string>
+    <string name="days_logged">Days logged: %1$d</string>
+    <string name="days_over_target">Days over target: %1$d</string>
+    <string name="plateau_flag_on">Plateau detected: weight has moved ≤ %1$s lbs over the last %2$d days</string>
+    <string name="plateau_flag_off">No plateau flagged</string>
+    <string name="plateau_insufficient_data">Not enough weigh-ins yet to evaluate plateau</string>
+    <string name="weight_chart_title">Weight over time</string>
+    <string name="calorie_chart_title">Calories over time</string>
+    <string name="export_button">Export data (.xlsx)</string>
+    <string name="export_pdf_button">Export summary (.pdf)</string>
+    <string name="no_data_yet">No entries yet</string>
+
+    <!-- Settings -->
+    <string name="settings_daily_target">Daily calorie target</string>
+    <string name="settings_plateau_days">Plateau window (days)</string>
+    <string name="settings_plateau_tolerance">Plateau tolerance (lbs)</string>
+    <string name="settings_deficit_default">Reference deficit default (kcal, not used by the app)</string>
+    <string name="save_settings">Save</string>
+    <string name="settings_saved">Settings saved</string>
+</resources>
