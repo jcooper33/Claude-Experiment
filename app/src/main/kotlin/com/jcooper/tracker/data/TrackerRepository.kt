@@ -28,6 +28,14 @@ class TrackerRepository(context: Context) {
     suspend fun deleteFood(entry: FoodEntry) = foodDao.delete(entry)
     suspend fun deleteWeight(entry: WeightEntry) = weightDao.delete(entry)
 
+    suspend fun importFood(entries: List<FoodEntry>) {
+        if (entries.isNotEmpty()) foodDao.insertAll(entries)
+    }
+
+    suspend fun importWeight(entries: List<WeightEntry>) {
+        if (entries.isNotEmpty()) weightDao.insertAll(entries)
+    }
+
     suspend fun allFoodRecords(): List<FoodLogRecord> = foodDao.getAll().map { it.toRecord() }
     suspend fun allWeightRecords(): List<WeightLogRecord> = weightDao.getAll().map { it.toRecord() }
 

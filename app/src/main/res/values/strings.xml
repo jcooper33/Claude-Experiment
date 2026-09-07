@@ -41,6 +41,13 @@
     <string name="calorie_chart_title">Calories over time</string>
     <string name="export_button">Export data (.xlsx)</string>
     <string name="export_pdf_button">Export summary (.pdf)</string>
+    <string name="import_button">Import from Excel (.xlsx)</string>
+    <string name="importing_message">Importing…</string>
+    <string name="import_result_title">Import complete</string>
+    <string name="import_result_body">Imported %1$d food entries and %2$d weight entries.</string>
+    <string name="import_result_body_with_warnings">Imported %1$d food entries and %2$d weight entries.\n\n%3$d row(s) skipped:\n%4$s</string>
+    <string name="import_error">Couldn\'t read that file: %1$s</string>
+    <string name="ok">OK</string>
     <string name="no_data_yet">No entries yet</string>
 
     <!-- Settings -->

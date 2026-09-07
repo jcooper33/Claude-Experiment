@@ -1,9 +1,13 @@
 package com.jcooper.tracker.ui.dashboard
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -14,6 +18,7 @@ import com.jcooper.tracker.data.SettingsStore
 import com.jcooper.tracker.data.TrackerRepository
 import com.jcooper.tracker.databinding.FragmentDashboardBinding
 import com.jcooper.tracker.export.ExportManager
+import com.jcooper.tracker.importer.ImportManager
 import com.jcooper.tracker.logic.FoodLogRecord
 import com.jcooper.tracker.logic.PlateauDetector
 import com.jcooper.tracker.logic.RollingStatsCalculator
@@ -31,7 +36,12 @@ class DashboardFragment : Fragment() {
     private lateinit var repository: TrackerRepository
     private lateinit var settings: SettingsStore
     private lateinit var exportManager: ExportManager
+    private lateinit var importManager: ImportManager
     private val zone: ZoneId = ZoneId.systemDefault()
+
+    private val importFileLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+        uri?.let { runImport(it) }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
@@ -42,6 +52,7 @@ class DashboardFragment : Fragment() {
         repository = TrackerRepository(requireContext())
         settings = SettingsStore(requireContext())
         exportManager = ExportManager(requireContext())
+        importManager = ImportManager(requireContext(), repository)
 
         binding.buttonExportXlsx.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -56,6 +67,14 @@ class DashboardFragment : Fragment() {
                 val weight = repository.allWeightRecords()
                 exportManager.exportPdfAndShare(food, weight, settings)
             }
+        }
+        binding.buttonImportXlsx.setOnClickListener {
+            importFileLauncher.launch(
+                arrayOf(
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "application/octet-stream",
+                ),
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -111,6 +130,38 @@ class DashboardFragment : Fragment() {
         binding.chartCalories.lineColor = ContextCompat.getColor(requireContext(), R.color.chart_calories)
         binding.chartCalories.points = dailyCalories.entries.map { (date, value) ->
             LineChartView.Point(x = date.toEpochDay().toFloat(), y = value.toFloat())
+        }
+    }
+
+    private fun runImport(uri: Uri) {
+        val context = requireContext()
+        Toast.makeText(context, R.string.importing_message, Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val summary = importManager.importFrom(uri)
+                val body = if (summary.warnings.isEmpty()) {
+                    getString(R.string.import_result_body, summary.foodImported, summary.weightImported)
+                } else {
+                    getString(
+                        R.string.import_result_body_with_warnings,
+                        summary.foodImported,
+                        summary.weightImported,
+                        summary.warnings.size,
+                        summary.warnings.joinToString("\n"),
+                    )
+                }
+                AlertDialog.Builder(context)
+                    .setTitle(R.string.import_result_title)
+                    .setMessage(body)
+                    .setPositiveButton(R.string.ok, null)
+                    .show()
+            } catch (e: Exception) {
+                AlertDialog.Builder(context)
+                    .setTitle(R.string.import_result_title)
+                    .setMessage(getString(R.string.import_error, e.message ?: e.toString()))
+                    .setPositiveButton(R.string.ok, null)
+                    .show()
+            }
         }
     }
 

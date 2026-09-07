@@ -12,6 +12,9 @@ interface FoodEntryDao {
     @Insert
     suspend fun insert(entry: FoodEntry): Long
 
+    @Insert
+    suspend fun insertAll(entries: List<FoodEntry>): List<Long>
+
     @Update
     suspend fun update(entry: FoodEntry)
 
@@ -32,6 +35,9 @@ interface FoodEntryDao {
 interface WeightEntryDao {
     @Insert
     suspend fun insert(entry: WeightEntry): Long
+
+    @Insert
+    suspend fun insertAll(entries: List<WeightEntry>): List<Long>
 
     @Update
     suspend fun update(entry: WeightEntry)
